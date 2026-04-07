@@ -8,7 +8,7 @@
     "dev:tauri": "node ./scripts/start-vite-dev.mjs",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "set PATH=%USERPROFILE%\\.cargo\\bin;%PATH%&& tauri"
+    "tauri": "node ./scripts/run-tauri.mjs"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",
