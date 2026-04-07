@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chord Draft Help</title>
+    <style>
+      :root {
+        --bg: #0f1726;
+        --panel: #162135;
+        --panel-2: #1b2940;
+        --text: #eef4ff;
+        --muted: #a9b6cb;
+        --line: rgba(169, 182, 203, 0.14);
+        --accent: #ff9a4a;
+        --accent-2: #4fb7ff;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "Hiragino Sans", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(79, 183, 255, 0.08), transparent 30%),
+          linear-gradient(180deg, #0d1524 0%, var(--bg) 100%);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      .wrap {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0 64px;
+      }
+      .hero {
+        display: grid;
+        gap: 16px;
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: linear-gradient(180deg, rgba(27, 41, 64, 0.92), rgba(15, 23, 38, 0.94));
+      }
+      h1, h2, h3 { margin: 0; }
+      h1 { font-size: clamp(2rem, 4vw, 3.5rem); }
+      h2 { font-size: 1.5rem; margin-bottom: 12px; }
+      .lead { color: var(--muted); max-width: 72ch; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+        margin-top: 24px;
+      }
+      .card {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(22, 33, 53, 0.88);
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .chip {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(79, 183, 255, 0.12);
+        color: var(--text);
+        border: 1px solid rgba(79, 183, 255, 0.22);
+        font-size: 0.92rem;
+      }
+      .chip.accent {
+        background: rgba(255, 154, 74, 0.12);
+        border-color: rgba(255, 154, 74, 0.24);
+      }
+      code, pre {
+        font-family: "Cascadia Code", "Consolas", monospace;
+      }
+      pre {
+        margin: 0;
+        padding: 14px;
+        overflow: auto;
+        border-radius: 12px;
+        background: var(--panel-2);
+        border: 1px solid var(--line);
+      }
+      .section {
+        margin-top: 28px;
+      }
+      .shot {
+        padding: 16px;
+        border: 1px dashed rgba(255,255,255,0.2);
+        border-radius: 16px;
+        color: var(--muted);
+        background: rgba(255,255,255,0.02);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+      }
+      th, td {
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      th { background: rgba(79, 183, 255, 0.08); }
+      tr:last-child td { border-bottom: 0; }
+      .muted { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="hero">
+        <h1>Chord Draft Help</h1>
+        <p class="lead">
+          コード進行の入力、タイムライン編集、テンプレート運用、MIDI 書き出しまでを整理した Web ヘルプです。
+          スクリーンショットは後から差し込める構造にしてあります。
+        </p>
+        <div class="chips">
+          <span class="chip accent">コード名 / ディグリー / 数字入力</span>
+          <span class="chip">MIDI Export / D&amp;D</span>
+          <span class="chip">テンプレート編集</span>
+          <span class="chip">変則長さ / 3/8 5/8</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>画面構成</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>上段</h3>
+            <p class="muted">プロジェクト、再生、保存、MIDI、D&amp;D</p>
+          </div>
+          <div class="card">
+            <h3>2段目</h3>
+            <p class="muted">拍子、スロット、既定長、優先表示、音色、ベース、開き</p>
+          </div>
+          <div class="card">
+            <h3>メイン</h3>
+            <p class="muted">入力欄、タイムライン、候補コード、インスペクタ、テンプレート</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>入力例</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>通常コード</h3>
+            <pre><code>C G Am F
+F Em7b5 A7 | Dm7 G7</code></pre>
+          </div>
+          <div class="card">
+            <h3>ディグリー</h3>
+            <pre><code>I V vi IV
+ii7 V7 Imaj7</code></pre>
+          </div>
+          <div class="card">
+            <h3>数字入力</h3>
+            <pre><code>1 5 6m 4
+2mis 5svn 1mas
+7hdm 3 6m</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>変則長さ</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>小節区切りと保持</h3>
+            <pre><code>G#sus4 - - G# - - - -
+| G#sus2 - - G# - - - -</code></pre>
+          </div>
+          <div class="card">
+            <h3>明示長</h3>
+            <pre><code>F(3/8) Em7b5(5/8)
+B(3/8) G#m(5/8)</code></pre>
+          </div>
+          <div class="card">
+            <h3>繰り返し</h3>
+            <pre><code>B | % | G#m | %
+E | = | B | =</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>音色とボイシング</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>選択肢</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>音色</td>
+              <td>Piano / Pad / Organ / Pluck</td>
+              <td>試聴と再生プレビューに反映</td>
+            </tr>
+            <tr>
+              <td>ベース</td>
+              <td>なし / 1 / 2 / 両方</td>
+              <td>1オクターブ下、2オクターブ下、または両方のベース音を追加</td>
+            </tr>
+            <tr>
+              <td>開き</td>
+              <td>なし / 3度 / 5度</td>
+              <td>第3音または第5音を1オクターブ上へ移してオープンボイシング化</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2>ショートカット</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>キー</th>
+              <th>動作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Ctrl+Enter</td><td>入力欄を反映</td></tr>
+            <tr><td>Ctrl+N / O / S / E</td><td>新規 / 開く / 保存 / MIDI</td></tr>
+            <tr><td>Space</td><td>再生 / 停止</td></tr>
+            <tr><td>Ctrl+← / Ctrl+→</td><td>選択コードを移動</td></tr>
+            <tr><td>Alt+← / Alt+→</td><td>長さ変更</td></tr>
+            <tr><td>Alt+↑ / Alt+↓</td><td>転回変更</td></tr>
+            <tr><td>Alt+.</td><td>付点切替</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2>スクリーンショット差し込み用</h2>
+        <div class="shot">
+          ここに入力欄、タイムライン、テンプレート、音色・ベース・開き設定のスクリーンショットを追加してください。
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
