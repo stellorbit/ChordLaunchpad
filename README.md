@@ -1,6 +1,13 @@
-![CL-Pre.png](https://github.com/stellorbit/ChordLaunchpad/blob/main/CL-Pre.png)
-多機能コード進行作成支援ソフト
+# ChordLaunchpad
 
+![CL-Pre.png](https://github.com/stellorbit/ChordLaunchpad/blob/main/CL-Pre.png)
+
+**多機能コード進行作成支援ソフト**
+
+## 免責事項
+
+このアプリケーションはプレビュー版です。
+当ソフトウェアによって発生した不利益・損害などの責任は負いません。
 
 ## 生成AI使用表明
 
