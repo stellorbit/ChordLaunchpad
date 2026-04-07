@@ -1,4 +1,8 @@
-# Tauri + React + Typescript
+# ChordLaunchPad
+
+[Screenshot](/images/CL-Pre.png)
+多機能コード進行作成支援ソフト
+
 
 ## 生成AI使用表明
 
