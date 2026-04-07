@@ -5,7 +5,7 @@ use std::{
     time::{SystemTime, UNIX_EPOCH},
 };
 
-use tauri::{path::BaseDirectory, AppHandle, Manager, Runtime, Window};
+use tauri::{AppHandle, Runtime, Window};
 
 fn sanitize_file_name(input: &str) -> String {
     let trimmed = input.trim();
@@ -51,35 +51,6 @@ fn write_drag_midi(bytes: &[u8], file_name: &str) -> Result<PathBuf, String> {
     Ok(path)
 }
 
-fn candidate_icon_paths<R: Runtime>(app: &AppHandle<R>) -> Vec<PathBuf> {
-    let mut paths = Vec::new();
-
-    if let Ok(path) = app.path().resolve("icons/32x32.png", BaseDirectory::Resource) {
-        paths.push(path);
-    }
-
-    if let Ok(current_dir) = std::env::current_dir() {
-        paths.push(current_dir.join("src-tauri").join("icons").join("32x32.png"));
-        paths.push(current_dir.join("icons").join("32x32.png"));
-    }
-
-    if let Ok(current_exe) = std::env::current_exe() {
-        if let Some(parent) = current_exe.parent() {
-            paths.push(parent.join("icons").join("32x32.png"));
-            paths.push(parent.join("..").join("icons").join("32x32.png"));
-        }
-    }
-
-    paths
-}
-
-fn resolve_drag_icon<R: Runtime>(app: &AppHandle<R>) -> Result<PathBuf, String> {
-    candidate_icon_paths(app)
-        .into_iter()
-        .find_map(|path| fs::canonicalize(path).ok())
-        .ok_or_else(|| "ドラッグ用アイコンが見つかりません".to_string())
-}
-
 #[tauri::command]
 fn start_midi_drag<R: Runtime>(
     app: AppHandle<R>,
@@ -88,7 +59,6 @@ fn start_midi_drag<R: Runtime>(
     file_name: String,
 ) -> Result<(), String> {
     let temp_file = write_drag_midi(&bytes, &sanitize_file_name(&file_name))?;
-    let preview_icon = resolve_drag_icon(&app)?;
     let (tx, rx) = channel();
 
     app.run_on_main_thread(move || {
@@ -101,7 +71,7 @@ fn start_midi_drag<R: Runtime>(
             Ok(raw_window) => drag::start_drag(
                 &raw_window,
                 drag::DragItem::Files(vec![temp_file]),
-                drag::Image::File(preview_icon),
+                drag::Image::Raw(include_bytes!("../icons/32x32.png").to_vec()),
                 |_result, _cursor_position| {},
                 drag::Options::default(),
             )
@@ -111,7 +81,7 @@ fn start_midi_drag<R: Runtime>(
 
         let _ = tx.send(result);
     })
-    .map_err(|error| error.to_string())?;
+    .map_err(|error: tauri::Error| error.to_string())?;
 
     rx.recv().map_err(|error| error.to_string())?
 }

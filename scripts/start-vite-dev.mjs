@@ -1,10 +1,15 @@
 import { execFile, spawn } from "node:child_process";
+import path from "node:path";
 import net from "node:net";
 
 const PORT = 1420;
 const IS_WINDOWS = process.platform === "win32";
+const CMD_PATH = process.env.ComSpec || "C:\\Windows\\System32\\cmd.exe";
 const NPM_COMMAND = IS_WINDOWS ? "npm.cmd" : "npm";
 const TASKKILL_COMMAND = IS_WINDOWS ? "taskkill.exe" : "taskkill";
+const nextEnv = { ...process.env };
+const nodeBin = path.dirname(process.execPath);
+nextEnv.PATH = nextEnv.PATH ? `${nodeBin}${path.delimiter}${nextEnv.PATH}` : nodeBin;
 
 function isPortOpen(port) {
   return new Promise((resolve) => {
@@ -22,13 +27,16 @@ function isPortOpen(port) {
 function run(command, args) {
   return new Promise((resolve, reject) => {
     const child = IS_WINDOWS
-      ? spawn("cmd.exe", ["/d", "/s", "/c", [command, ...args].join(" ")], {
+      ? spawn(CMD_PATH, ["/d", "/s", "/c", command, ...args], {
           stdio: "inherit",
           shell: false,
+          env: nextEnv,
+          windowsVerbatimArguments: true,
         })
       : spawn(command, args, {
           stdio: "inherit",
           shell: false,
+          env: nextEnv,
         });
     child.once("exit", (code) => {
       if (code === 0) resolve();
