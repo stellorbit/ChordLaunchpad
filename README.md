@@ -1,4 +1,4 @@
-[CL-Pre.png](https://github.com/stellorbit/ChordLaunchpad/blob/main/CL-Pre.png)
+![CL-Pre.png](https://github.com/stellorbit/ChordLaunchpad/blob/main/CL-Pre.png)
 多機能コード進行作成支援ソフト
 
 
