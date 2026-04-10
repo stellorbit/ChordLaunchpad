@@ -48,6 +48,9 @@
 - macOS 実機での検証ができないため
 - まずは Windows 版の品質を優先するため
 
+現在、GitHub Actions の preview workflow は停止しています。
+Windows preview はローカル build を前提にしています。
+
 This template should help get you started developing with Tauri, React and Typescript in Vite.
 
 ## Recommended IDE Setup

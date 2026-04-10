@@ -2,15 +2,13 @@ name: preview-release
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "preview-v*"
 
 permissions:
   contents: write
 
 jobs:
   build-preview:
+    if: false
     runs-on: windows-latest
 
     steps:
