@@ -16,8 +16,6 @@
 
 ## 既知の不具合・未実装機能
 
-**26-04-08 修正** ・D&Dエクスポート機能動作不可
-
 ・「？」ボタンはWebヘルプへのリンク用ですが、現在はダミーです。
 
 ## 主要機能
@@ -41,6 +39,14 @@
 - [docs/COMMAND_TABLE_ja.md](./docs/COMMAND_TABLE_ja.md)
 - [docs/CHEATSHEET_ja.md](./docs/CHEATSHEET_ja.md)
 - [docs/PREVIEW_RELEASE_ja.md](./docs/PREVIEW_RELEASE_ja.md)
+
+## Preview 配布方針
+
+現在の preview 配布は Windows 版のみです。
+
+- GitHub Actions のコストを抑えるため
+- macOS 実機での検証ができないため
+- まずは Windows 版の品質を優先するため
 
 This template should help get you started developing with Tauri, React and Typescript in Vite.
 
